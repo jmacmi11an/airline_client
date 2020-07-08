@@ -8,7 +8,7 @@ class Flights extends Component {
     super();
     this.state = {
       flights: [],
-      selectedFlight: '',
+      selectedFlight: null,
     }
 
     const fetchFlights = () => {
@@ -24,9 +24,10 @@ class Flights extends Component {
     this._handleOptionChange = this._handleOptionChange.bind(this);
   }
 
-  _handleSubmit(event){
-    event.preventDefault();
-    console.log(this.state.selectedFlight)
+  getInitialState(){
+    return {
+      selectedFlight: this.state.flights[0]
+    };
   }
 
   _handleOptionChange(event){
@@ -35,6 +36,10 @@ class Flights extends Component {
     });
   }
 
+  _handleSubmit(event){
+    event.preventDefault();
+    console.log('you have selected: ', this.state.selectedFlight);
+  }
 
 
   render (){
@@ -44,12 +49,12 @@ class Flights extends Component {
         { this.state.flights.map((f) =>
           <div>
             <label>
-              <input type="radio" id={ f.id } value={ f.id } checked={this.state.selectedOption === f.id } onChange={this._handleOptionChange}/>
+              <input type="radio" id={ f.id } value={ f.id } checked={this.state.selectedFlight == f.id } onChange={this._handleOptionChange}/>
               { f.origin } - { f.destination }, { f.date }
             </label>
           </div> )
         }
-        <button>Select Flight</button>
+        <button type="submit">Select Flight</button>
       </form>
     )
   }

@@ -6,6 +6,12 @@ import SeatMap from './SeatMap';
 
 
 class BurningAirlines extends Component {
+  constructor(){
+    super();
+    this.state = {
+
+    }
+  }
   render () {
     return (
       <div>
@@ -13,7 +19,7 @@ class BurningAirlines extends Component {
         <p>fly at your own risk</p>
          <Login />
          <Search />
-         <Flights />
+         <Flights flights={this.props.flights}/>
          <SeatMap />
       </div>
     )
