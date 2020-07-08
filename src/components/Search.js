@@ -3,7 +3,8 @@ import axios from 'axios';
 
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
-class SearchForm extends Component {
+//i changed this to Search from SearchForm
+class Search extends Component {
   constructor() {
     super();
     this.state = {
@@ -62,6 +63,6 @@ class SearchForm extends Component {
   }
 }
 
-class
+// class
 
 export default Search;

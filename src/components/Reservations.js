@@ -7,7 +7,23 @@ class Reservations extends Component {
   constructor(){
     super();
     this.state = {
-      
+      reservations: [],
+      userID: null,
     }
   }
+
+  render (){
+    return (
+      <div>
+        <h4>My reservations:</h4>
+
+      </div>
+    )
+
+  }
+
 }
+
+
+
+export default Reservations;
