@@ -5,9 +5,9 @@ const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
 // <<<<<<< HEAD
 class Search extends Component {
-// =======
+=======
 
-//*****************Parent ************************
+// *****************Parent ************************
 
 // class Search extends Component {
 
@@ -103,9 +103,6 @@ class SearchForm extends Component {
   }
 }
 
-<<<<<<< HEAD
 // class
 
-=======
->>>>>>> 90e84c2b7c47ec99cbbb6fddbe4ac7e0def39675
 export default Search;
