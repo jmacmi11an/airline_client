@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import Flights from './Flights'
 import Search from './Search'
 import SeatMap from './SeatMap';
+import Reservations from './Reservations';
 // import axios from 'axios';
 
 
 class BurningAirlines extends Component {
+  constructor(){
+    super();
+    this.state = {
+
+    }
+  }
   render () {
     return (
       <div>
@@ -13,8 +20,9 @@ class BurningAirlines extends Component {
         <p>fly at your own risk</p>
          <Login />
          <Search />
-         <Flights />
+         <Flights flights={this.props.flights}/>
          <SeatMap />
+         <Reservations />
       </div>
     )
   }
