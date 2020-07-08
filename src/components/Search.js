@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
-
 //*****************Parent ************************
 
 class Search extends Component {
@@ -98,5 +97,6 @@ class SearchForm extends Component {
     );
   }
 }
+
 
 export default Search;

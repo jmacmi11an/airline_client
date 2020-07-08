@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import Flights from './Flights'
 import Search from './Search'
 import SeatMap from './SeatMap';
+<<<<<<< HEAD
+import { Alert } from 'reactstrap';
+import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
+=======
 import Reservations from './Reservations';
+>>>>>>> 90e84c2b7c47ec99cbbb6fddbe4ac7e0def39675
 // import axios from 'axios';
 
 
@@ -16,7 +21,9 @@ class BurningAirlines extends Component {
   render () {
     return (
       <div>
+         <Alert color="info">
         <h1>Welcome to Burning Airlines</h1>
+        </Alert>
         <p>fly at your own risk</p>
          <Login />
          <Search />
