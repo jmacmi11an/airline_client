@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Flights from './Flights'
+import Search from './Search'
 // import axios from 'axios';
 
 
