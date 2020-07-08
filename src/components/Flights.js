@@ -8,7 +8,7 @@ class Flights extends Component {
     super();
     this.state = {
       flights: [],
-      flight: '',
+      selectedFlight: null,
     }
 
     const fetchFlights = () => {
@@ -21,30 +21,41 @@ class Flights extends Component {
     fetchFlights();
 
     this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleOptionChange = this._handleOptionChange.bind(this);
+  }
+
+  getInitialState(){
+    return {
+      selectedFlight: this.state.flights[0]
+    };
+  }
+
+  _handleOptionChange(event){
+    this.setState({
+      selectedFlight: event.target.value
+    });
   }
 
   _handleSubmit(event){
     event.preventDefault();
-    this.state.flight.onSubmit(this.state.flights.id)
-    console.log(this.state.flights.id)
+    console.log('you have selected: ', this.state.selectedFlight);
   }
-
 
 
   render (){
     // Add a conditional here so the following is only shown if a boolean is triggered.
     return (
-      <div>
-        <form onSubmit={ this._handleSubmit }>
-          { this.state.flights.map((f) =>
-            <div>
-              <input type="radio" name="flight" id={ f.id } value={ f.id } />
-              <label for={ f.id }>{ f.origin } - { f.destination } , { f.date }</label>
-            </div> )
-          }
-          <button>Select Flight</button>
-        </form>
-      </div>
+      <form onSubmit={this._handleSubmit}>
+        { this.state.flights.map((f) =>
+          <div>
+            <label>
+              <input type="radio" id={ f.id } value={ f.id } checked={this.state.selectedFlight == f.id } onChange={this._handleOptionChange}/>
+              { f.origin } - { f.destination }, { f.date }
+            </label>
+          </div> )
+        }
+        <button type="submit">Select Flight</button>
+      </form>
     )
   }
 
