@@ -1,97 +1,105 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-const FLIGHTS_URL = 'http://localhost:3000/flights.json';
+class SeatMap extends Component {
 
-class Seat extends Component {
-  checkIsAvailable = () => {
-    if ( this.props.takenSeats.indexOf( this.props.seatId ) !== -1 ) { // if this seat is taken
-      this.setState({
-        isTaken: true
-      });
-    } else {
-      this.setState({
-        isTaken: false
-      });
+  constructor() {
+    super();
+      this.state = {
+      seat: [
+        'Front1','Front2','Front3',
+        'Middle1','Middle2','Middle3',
+        'Back1','Back2','Back3'
+      ],
+      seatAvailable: [
+        'Front1','Front2','Front3',
+        'Middle1','Middle2','Middle3',
+        'Back1','Back2','Back3'
+      ],
+      seatReserved: []
     }
   }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isTaken: false,
-      // isSelected: false
-    };
-  }
-
-  confirmUpdate() {
-    this.checkIsAvailable();
-  }
-
-  _handleClick = (e) => {
-    // console.log( this.props.seatId );
-    this.props.getSelectedSeat( this.props.seatId );
-    this.setState({
-      isSelected: true
-    });
-
-  }
-
-  render() {
-    // console.log( this.props.selectedSeat );
-    return (
-      <div className={ this.state.isTaken ? "this seat is taken" : "this seat is available" } onClick={ this._handleClick } >
-        <div className={ this.props.selectedSeat === this.props.seatId && !this.state.isTaken ? "selected" : null } >
-
-        </div>
-      </div>
-    );
-  }
-}
-
-class SeatMap extends Component {
-  getSelectedSeat = (s) => {
-    this.setState({
-      selectedSeat: s
-    });
-    this.props.passSeat(s);
-  }
-
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      selectedSeat: ""
-    };
+  onClickData(seat) {
+    if(this.state.seatReserved.indexOf(seat) > -1 ) {
+      this.setState({
+        seatAvailable: this.state.seatAvailable.concat(seat),
+        seatReserved: this.state.seatReserved.filter(res => res != seat)
+      })
+    } else {
+      this.setState({
+        seatReserved: this.state.seatReserved.concat(seat),
+        seatAvailable: this.state.seatAvailable.filter(res => res != seat)
+      })
+    }
   }
 
   render() {
     return (
       <div>
-        <h2>Gaudy Seat Map</h2>
-        <p>Please choose a seat</p>
-        <div className="grid-container" >
-          {/* make a row for number of rows */}
-          { [...Array(this.props.rows)].map((e, i) =>
-            <div className="grid-row" key={i}>
-              {/* row letter */}
-              <span className="row-num">{ String.fromCharCode(i+65) }</span>
-              {/*  make seat re num of cols */}
-              { [...Array(this.props.cols)].map((e, j) =>
-                <Seat
-                  key={`${String.fromCharCode(i+65)}${j+1}`}
-                  seatId={`${String.fromCharCode(i+65)}${j+1}`}
-                  takenSeats={ this.props.takenSeats }
-                  getSelectedSeat={ this.getSelectedSeat }
-                  selectedSeat={ this.state.selectedSeat }
-                />
-              ) }
-            </div>
-          ) }
-        </div>
-        <p>Selected Seat: { this.state.selectedSeat }</p>
+        <h1>Seat Reservation System</h1>
+        <DrawGrid
+          seat = { this.state.seat }
+          available = { this.state.seatAvailable }
+          reserved = { this.state.seatReserved }
+          onClickData = { this.onClickData.bind(this) }
+          />
       </div>
-    );
+    )
+  }
+}
+
+class DrawGrid extends React.Component {
+  render() {
+    return (
+       <div className="container">
+        <h2></h2>
+        <table className="grid">
+          <tbody>
+              <tr>
+                { this.props.seat.map( row =>
+                  <td
+                    className={this.props.reserved.indexOf(row) > -1? 'reserved': 'available'}
+                    key={row} onClick = {e => this.onClickSeat(row)}>{row} </td>) }
+              </tr>
+          </tbody>
+        </table>
+
+        <AvailableList available = { this.props.available } />
+        <ReservedList reserved = { this.props.reserved } />
+       </div>
+    )
+  }
+
+  onClickSeat(seat) {
+    this.props.onClickData(seat);
+  }
+}
+
+class AvailableList extends React.Component {
+  render() {
+    const seatCount = this.props.available.length;
+    return(
+      <div className="left">
+        <h4>Available Seats: ({seatCount == 0? 'No seats available' : seatCount})</h4>
+        <ul>
+          {this.props.available.map( res => <li key={res} >{res}</li> )}
+        </ul>
+      </div>
+    )
+  }
+}
+
+class ReservedList extends React.Component {
+  render() {
+    return(
+      <div className="right">
+        <h4>Reserved Seats: ({this.props.reserved.length})</h4>
+        <ul>
+          { this.props.reserved.map(res => <li key={res} >{res}</li>) }
+        </ul>
+      </div>
+    )
   }
 }
 

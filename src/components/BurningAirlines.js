@@ -14,6 +14,7 @@ class BurningAirlines extends Component {
          <Login />
          <Search />
          <Flights />
+         <SeatMap />
       </div>
     )
   }
