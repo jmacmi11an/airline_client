@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Flights from './Flights'
 // import axios from 'axios';
 
 
@@ -8,7 +9,8 @@ class BurningAirlines extends Component {
       <div>
         <h1>Welcome to Burning Airlines</h1>
         <p>fly at your own risk</p>
-        <Login />
+//          <Login />
+//          <Flights />
       </div>
     )
   }
