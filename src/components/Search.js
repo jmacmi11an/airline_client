@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
-<<<<<<< HEAD
+
 //*****************Parent ************************
 
 class Search extends Component {
@@ -40,10 +40,7 @@ class Search extends Component {
 //***************child****************************************
 
 class SearchForm extends Component {
-=======
-//i changed this to Search from SearchForm
-class Search extends Component {
->>>>>>> f93a379d8b2853e2ccd8a339c0c268a2ee70cfa1
+
   constructor() {
     super();
     this.state = {
@@ -101,10 +98,5 @@ class Search extends Component {
     );
   }
 }
-
-<<<<<<< HEAD
-=======
-// class
->>>>>>> f93a379d8b2853e2ccd8a339c0c268a2ee70cfa1
 
 export default Search;
