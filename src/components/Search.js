@@ -3,6 +3,41 @@ import axios from 'axios';
 
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
+//*****************Parent ************************
+
+class Search extends Component {
+
+  constructor(props){
+    super(props)
+    this.state = {
+      flights: [],
+    /* flight_id: "" */ //to pass to display flights ?
+    };
+    this.fetchFlights = this.fetchFlights.bind(this);
+  }
+
+  fetchFlights(o,d) {
+    axios.get(FLIGHTS_URL).then(function (results){
+      let array_flights = [];
+      for (let i=0; i<results.data.length; i++)
+        if (results.data[i].origin === o && results.data[i].destination === d)
+          array_flights.push(results.data[i]);
+        this.setState({flights : array_flights});
+    }.bind(this));
+  }
+
+  render(){
+    return (
+      <div>
+        <SearchForm onSubmit = {this.fetchFlights} />
+      </div>
+    );
+  }
+
+}
+
+//***************child****************************************
+
 class SearchForm extends Component {
   constructor() {
     super();
@@ -62,6 +97,5 @@ class SearchForm extends Component {
   }
 }
 
-class
 
 export default Search;
