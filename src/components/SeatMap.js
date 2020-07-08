@@ -49,7 +49,7 @@ class SeatMap extends Component {
   }
 }
 
-class DrawGrid extends React.Component {
+class DrawGrid extends Component {
   render() {
     return (
        <div className="container">
@@ -76,7 +76,7 @@ class DrawGrid extends React.Component {
   }
 }
 
-class AvailableList extends React.Component {
+class AvailableList extends Component {
   render() {
     const seatCount = this.props.available.length;
     return(
@@ -90,7 +90,7 @@ class AvailableList extends React.Component {
   }
 }
 
-class ReservedList extends React.Component {
+class ReservedList extends Component {
   render() {
     return(
       <div className="right">
