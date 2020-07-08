@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Flights from './Flights'
 import Search from './Search'
 import SeatMap from './SeatMap';
+import Reservations from './Reservations';
 // import axios from 'axios';
 
 
@@ -21,6 +22,7 @@ class BurningAirlines extends Component {
          <Search />
          <Flights flights={this.props.flights}/>
          <SeatMap />
+         <Reservations />
       </div>
     )
   }
