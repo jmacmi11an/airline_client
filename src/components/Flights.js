@@ -27,21 +27,38 @@ class Flights extends Component {
     });
   }
 
-
-  render () {
+  render (){
     return (
       <div>
-        <ul>
-          { this.state.flights.map((f) => <li key={ f.id }>
-            { f.origin}- 
-            { f.destination},
-            { f.date }</li>) }
-        </ul>
+        <form onSubmit={ this._handleSubmit }>
+          { this.state.flights.map((f) =>
+            <div>
+              <input type="radio" name="flight" id={ f.id } value={ f.id } />
+              <label for={ f.id }>{ f.origin } - { f.destination } , { f.date }</label>
+            </div> )
+          }
+          <button>Select Flight</button>
+        </form>
       </div>
     )
   }
+
+
 }
 
 
 
 export default Flights;
+
+// render () {
+//   return (
+//     <div>
+//       <form>
+//         { this.state.flights.map((f) =>
+//           <input type="radio" value={ f.id }>
+//           <label for={ f.id }>{ f.origin} - {f.destination} , {f.date}</label> )
+//         }
+//       </form>
+//     </div>
+//   );
+// }
