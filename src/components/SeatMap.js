@@ -1,25 +1,28 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Alert } from 'reactstrap';
 
 class SeatMap extends Component {
-
   constructor() {
     super();
       this.state = {
       seat: [
-        'A1','A2','A3', 'A4','A5','A6',
-        'B1','B2','B3', 'B4','B5','B6',
-        'C1','C2','C3', 'C4','C5', 'C6'
+        ['A1','B1','C1', 'D1',],
+        ['A2','B2','C2', 'D2',],
+        ['A3','B3','C3', 'D3',],
+        ['A4','B4','C4', 'D4',],
+        ['A5','B5','C5', 'D5']
       ],
       seatAvailable: [
-        'A1','A2','A3', 'A4','A5','A6',
-        'B1','B2','B3', 'B4','B5','B6',
-        'C1','C2','C3', 'C4','C5', 'C6'
+        'A1','B1','C1', 'D1',
+        'A2','B2','C2', 'D2',
+        'A3','B3','C3', 'D3',
+        'A4','B4','C4', 'D4',
+        'A5','B5','C5', 'D5'
       ],
       seatReserved: []
     }
   }
-
   onClickData(seat) {
     if(this.state.seatReserved.indexOf(seat) > -1 ) {
       this.setState({
@@ -33,7 +36,6 @@ class SeatMap extends Component {
       })
     }
   }
-
   render() {
     return (
       <div>
@@ -48,7 +50,6 @@ class SeatMap extends Component {
     )
   }
 }
-
 class DrawGrid extends Component {
   render() {
     return (
@@ -56,26 +57,25 @@ class DrawGrid extends Component {
         <h2></h2>
         <table className="grid">
           <tbody>
+            {this.props.seat.map( row =>
               <tr>
-                { this.props.seat.map( row =>
+                { row.map( element =>
                   <td
-                    className={this.props.reserved.indexOf(row) > -1? 'reserved': 'available'}
-                    key={row} onClick = {e => this.onClickSeat(row)}>{row} </td>) }
+                    className={this.props.reserved.indexOf(element) > -1? 'reserved': 'available'}
+                    key={element} onClick = {e => this.onClickSeat(element)}>{element} </td>) }
               </tr>
+            )}
           </tbody>
         </table>
-
         <AvailableList available = { this.props.available } />
         <ReservedList reserved = { this.props.reserved } />
        </div>
     )
   }
-
   onClickSeat(seat) {
     this.props.onClickData(seat);
   }
 }
-
 class AvailableList extends Component {
   render() {
     const seatCount = this.props.available.length;
@@ -89,7 +89,6 @@ class AvailableList extends Component {
     )
   }
 }
-
 class ReservedList extends Component {
   render() {
     return(
@@ -102,5 +101,4 @@ class ReservedList extends Component {
     )
   }
 }
-
 export default SeatMap;
