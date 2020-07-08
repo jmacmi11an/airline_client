@@ -9,8 +9,8 @@ class BurningAirlines extends Component {
       <div>
         <h1>Welcome to Burning Airlines</h1>
         <p>fly at your own risk</p>
-//          <Login />
-//          <Flights />
+         <Login />
+         <Flights />
       </div>
     )
   }
