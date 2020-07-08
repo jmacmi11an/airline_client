@@ -4,14 +4,14 @@ import axios from 'axios';
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
 class Seat extends Component {
-  checkTaken = () => {
-    if ( this.props.takenSeats.indexOf(this.props.seatID) !== -1) {
+  checkIsAvailable = () => {
+    if ( this.props.takenSeats.indexOf( this.props.seatId ) !== -1 ) { // if this seat is taken
       this.setState({
         isTaken: true
       });
     } else {
-      this.setState ({
-        isTaken: false;
+      this.setState({
+        isTaken: false
       });
     }
   }
@@ -19,59 +19,64 @@ class Seat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isTaken: false; // seat is not taken
+      isTaken: false,
+      // isSelected: false
     };
   }
 
-  updatedComponent() {
-    this.checkTaken();
+  confirmUpdate() {
+    this.checkIsAvailable();
   }
 
-  _handleClick = (q) => {
-    this.props.getSeat(this.props.seatID);
+  _handleClick = (e) => {
+    // console.log( this.props.seatId );
+    this.props.getSelectedSeat( this.props.seatId );
     this.setState({
       isSelected: true
     });
+
   }
 
   render() {
+    // console.log( this.props.selectedSeat );
     return (
-      <div> className={ this.state.isTaken ? "this seat is taken " : "this seat is free "} onClick={this._handleClick}>
-      <div> className={ this.props.selectedSeat === this.props.seatID && !this.state.isTaken ? "seleced" : null }>
+      <div className={ this.state.isTaken ? "this seat is taken" : "this seat is available" } onClick={ this._handleClick } >
+        <div className={ this.props.selectedSeat === this.props.seatId && !this.state.isTaken ? "selected" : null } >
 
-      </div>
+        </div>
       </div>
     );
   }
 }
 
 class SeatMap extends Component {
-  getSeat = (s) => {
+  getSelectedSeat = (s) => {
     this.setState({
       selectedSeat: s
     });
     this.props.passSeat(s);
   }
 
+
   constructor(props) {
     super(props);
     this.state = {
-      selectedSeat: ''
+      selectedSeat: ""
     };
   }
 
   render() {
     return (
       <div>
-        <h2>Seat Map</h2>
-        <p>Please choose an available seat</p>
+        <h2>Gaudy Seat Map</h2>
+        <p>Please choose a seat</p>
         <div className="grid-container" >
           {/* make a row for number of rows */}
           { [...Array(this.props.rows)].map((e, i) =>
             <div className="grid-row" key={i}>
               {/* row letter */}
               <span className="row-num">{ String.fromCharCode(i+65) }</span>
-              {/*  make seat / num of cols */}
+              {/*  make seat re num of cols */}
               { [...Array(this.props.cols)].map((e, j) =>
                 <Seat
                   key={`${String.fromCharCode(i+65)}${j+1}`}
@@ -84,7 +89,7 @@ class SeatMap extends Component {
             </div>
           ) }
         </div>
-        <p>Selected Seat: { this.state.selectedSeat } </p>
+        <p>Selected Seat: { this.state.selectedSeat }</p>
       </div>
     );
   }
