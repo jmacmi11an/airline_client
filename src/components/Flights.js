@@ -8,6 +8,7 @@ class Flights extends Component {
     super();
     this.state = {
       flights: [],
+      flight: '',
     }
 
     const fetchFlights = () => {
@@ -19,15 +20,19 @@ class Flights extends Component {
 
     fetchFlights();
 
+    this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  saveFlights(content){
-    axios.post(FLIGHTS_URL, {content: content}).then((result) => {
-      this.setState({flights: [result.data, ...this.state.secrets]});
-    });
+  _handleSubmit(event){
+    event.preventDefault();
+    this.state.flight.onSubmit(this.state.flights.id)
+    console.log(this.state.flights.id)
   }
+
+
 
   render (){
+    // Add a conditional here so the following is only shown if a boolean is triggered.
     return (
       <div>
         <form onSubmit={ this._handleSubmit }>
@@ -50,15 +55,12 @@ class Flights extends Component {
 
 export default Flights;
 
-// render () {
-//   return (
-//     <div>
-//       <form>
-//         { this.state.flights.map((f) =>
-//           <input type="radio" value={ f.id }>
-//           <label for={ f.id }>{ f.origin} - {f.destination} , {f.date}</label> )
-//         }
-//       </form>
-//     </div>
-//   );
+
+
+
+// Copied from SECRETS, But -- Don't need to save flights, need to select a single flight
+// saveFlights(content){
+//   axios.post(FLIGHTS_URL, {content: content}).then((result) => {
+//     this.setState({flights: [result.data, ...this.state.secrets]});
+//   });
 // }

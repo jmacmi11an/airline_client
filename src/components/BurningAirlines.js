@@ -11,6 +11,7 @@ class BurningAirlines extends Component {
         <h1>Welcome to Burning Airlines</h1>
         <p>fly at your own risk</p>
          <Login />
+         <Search />
          <Flights />
       </div>
     )
