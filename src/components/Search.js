@@ -6,9 +6,11 @@ import axios from 'axios';
 
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
-//*****************Parent ************************
-
 class Search extends Component {
+
+// *****************Parent ************************
+
+// class Search extends Component {
 
   constructor(props){
     super(props)
@@ -33,7 +35,7 @@ class Search extends Component {
     console.log(this.state.flights);
     return (
       <div>
-        <SearchForm onSubmit={this.fetchFlights} />
+        <SearchForm HelloonSubmit={this.fetchFlights} />
         <Flights flights_all={ this.state.flights } />
       </div>
     );
@@ -69,7 +71,7 @@ class SearchForm extends Component {
 
     _handleSubmit(event) {
         event.preventDefault();
-        this.props.onSubmit(this.state.origin,this.state.destination);
+        this.props.HelloonSubmit(this.state.origin,this.state.destination);
     }
 
   render() {
@@ -103,5 +105,6 @@ class SearchForm extends Component {
   }
 }
 
+// class
 
 export default Search;

@@ -1,24 +1,45 @@
 import React, { Component } from 'react';
+import SeatMap from './SeatMap'
 import axios from 'axios';
 
-const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
 class Flights extends Component {
   constructor(props){
     super(props);
     this.state = {
-      flights_all: [],
+      flights_all: this.props.flights_all,
       selectedFlight: null,
+    }
+    this.fetchFlight = this.fetchFlight.bind(this);
+  }
+
+  fetchFlight(flight){
+    this.setState({selectedFlight: flight })
+  }
+
+  render(){
+    return(
+      <div>
+        <FlightForm flights_all={this.props.flights_all} onSubmit={this.fetchFlight}/>
+        <SeatMap currentFlight={ this.state.selectedFlight}/>
+      </div>
+    )
+  }
+}
+
+
+////////////////////////child//////////////////////////////
+
+class FlightForm extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      flights_all: this.props.flights_all,
+      selectedFlight: {}
     }
 
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleOptionChange = this._handleOptionChange.bind(this);
-  }
-
-  getInitialState(){
-    return {
-      selectedFlight: this.state.flights_all[0]
-    };
   }
 
   _handleOptionChange(event){
@@ -30,6 +51,7 @@ class Flights extends Component {
   _handleSubmit(event){
     event.preventDefault();
     console.log('you have selected: ', this.state.selectedFlight);
+    this.props.onSubmit(this.state.selectedFlight)
   }
 
 
@@ -48,12 +70,9 @@ class Flights extends Component {
         }
         <button type="submit">Select Flight</button>
       </form>
-    )
+    );
   }
-
-
 }
-
 
 
 export default Flights;
