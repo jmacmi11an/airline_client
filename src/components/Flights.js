@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SeatMap from './SeatMap'
 import axios from 'axios';
-
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class Flights extends Component {
   constructor(props){
@@ -62,10 +62,8 @@ class FlightForm extends Component {
       <form onSubmit={this._handleSubmit}>
         { this.props.flights_all.map((f) =>
           <div>
-            <label>
               <input type="radio" id={ f.id } value={ f.id } checked={this.state.selectedFlight == f.id } onChange={this._handleOptionChange}/>
               { f.origin } - { f.destination }, { f.date }
-            </label>
           </div> )
         }
         <button type="submit">Select Flight</button>
