@@ -7,6 +7,7 @@ class Login extends Component {
     super();
 
     this.state = {
+      newReservation: {}, //flight_id, user_id, seat
       email: '',
       passwordDigest: '',
     }

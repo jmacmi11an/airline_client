@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Alert } from 'reactstrap';
+import Login from './Login'
 
 class SeatMap extends Component {
   constructor() {
@@ -72,6 +73,7 @@ class DrawGrid extends Component {
         </table>
         <AvailableList available = { this.props.available } />
         <ReservedList reserved = { this.props.reserved } />
+        <Login seat={ this.props.reserved } />
        </div>
     )
   }

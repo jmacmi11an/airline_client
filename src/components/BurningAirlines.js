@@ -25,7 +25,6 @@ class BurningAirlines extends Component {
         </Alert>
         <p>fly at your own risk</p>
          <Search />
-         <Login />
          <Reservations />
       </div>
     )
