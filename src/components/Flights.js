@@ -4,21 +4,12 @@ import axios from 'axios';
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
 class Flights extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      flights: [],
+      flights_all: [],
       selectedFlight: null,
     }
-
-    const fetchFlights = () => {
-      axios.get(FLIGHTS_URL).then((results) => {
-        this.setState({flights: results.data});
-        // do we need regular updating? probably
-      });
-    };
-
-    fetchFlights();
 
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleOptionChange = this._handleOptionChange.bind(this);
@@ -26,7 +17,7 @@ class Flights extends Component {
 
   getInitialState(){
     return {
-      selectedFlight: this.state.flights[0]
+      selectedFlight: this.state.flights_all[0]
     };
   }
 
@@ -44,9 +35,10 @@ class Flights extends Component {
 
   render (){
     // Add a conditional here so the following is only shown if a boolean is triggered.
+    console.log(this.props)
     return (
       <form onSubmit={this._handleSubmit}>
-        { this.state.flights.map((f) =>
+        { this.props.flights_all.map((f) =>
           <div>
             <label>
               <input type="radio" id={ f.id } value={ f.id } checked={this.state.selectedFlight == f.id } onChange={this._handleOptionChange}/>

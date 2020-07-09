@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import Flights from './Flights'
+
 import axios from 'axios';
+
 
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
@@ -27,9 +30,11 @@ class Search extends Component {
   }
 
   render(){
+    console.log(this.state.flights);
     return (
       <div>
-        <SearchForm onSubmit = {this.fetchFlights} />
+        <SearchForm onSubmit={this.fetchFlights} />
+        <Flights flights_all={ this.state.flights } />
       </div>
     );
   }
