@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Alert } from 'reactstrap';
+import { Table } from 'reactstrap';
+import { Button, ButtonGroup, ButtonToolbar } from 'reactstrap';
 
 class SeatMap extends Component {
   constructor() {
@@ -55,7 +57,7 @@ class DrawGrid extends Component {
     return (
        <div className="container">
         <h2></h2>
-        <table className="grid">
+        <Table striped className="grid">
           <tbody>
             {this.props.seat.map( row =>
               <tr>
@@ -66,9 +68,11 @@ class DrawGrid extends Component {
               </tr>
             )}
           </tbody>
-        </table>
-        <AvailableList available = { this.props.available } />
-        <ReservedList reserved = { this.props.reserved } />
+        </Table>
+        <Table striped className="grid">
+        <td><AvailableList available = { this.props.available } /></td>
+        <td><ReservedList reserved = { this.props.reserved } /></td>
+        </Table>
        </div>
     )
   }

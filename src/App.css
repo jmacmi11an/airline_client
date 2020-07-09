@@ -83,3 +83,13 @@ h1 {
 li {
   list-style: none;
 }
+
+Table {
+  button{
+  background-color:yellow;
+}
+
+button:hover{background-color:orange;}
+
+button:focus{background-color:red;}
+}
