@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Badge } from 'reactstrap';
 const RESERVATIONS_URL = 'http://localhost:3000/reservations.json';
 
 class Reservations extends Component {
@@ -37,7 +37,7 @@ class Reservations extends Component {
   render (){
     return (
       <div>
-        <h4>My reservations:</h4>
+        <h4> <Badge color="secondary"> My reservations: </Badge> </h4>
         { this.state.myRes.map((r) =>
           <ul>
             <li>{r.seat} - {r.url}</li>

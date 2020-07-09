@@ -66,7 +66,7 @@ class DrawGrid extends Component {
             {this.props.seat.map( row =>
               <tr>
                 { row.map( element =>
-                  <td
+                  <td class="tdstuff"
                     className={this.props.reserved.indexOf(element) > -1? 'reserved': 'available'}
                     key={element} onClick = {e => this.onClickSeat(element)}>{element} </td>) }
               </tr>
@@ -87,12 +87,12 @@ class AvailableList extends Component {
   render() {
     const seatCount = this.props.available.length;
     return(
-      <div className="left">
+      <Table striped className="grid">
         <h4>Available Seats: ({seatCount == 0? 'No seats available' : seatCount})</h4>
         <ul>
           {this.props.available.map( res => <li key={res} >{res}</li> )}
         </ul>
-      </div>
+          </Table>
     )
   }
 }

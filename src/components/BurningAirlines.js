@@ -6,6 +6,7 @@ import Reservations from './Reservations';
 
 import { Alert } from 'reactstrap';
 import { Col, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Jumbotron, Container } from 'reactstrap';
 // >>>>>>> f63a5912d4f053e9beca3a71d644b310e9d87657
 // import axios from 'axios';
 
@@ -20,10 +21,12 @@ class BurningAirlines extends Component {
   render () {
     return (
       <div>
-         <Alert color="info">
-        <h1>Welcome to Burning Airlines</h1>
-        </Alert>
-        <p>fly at your own risk</p>
+         <Jumbotron fluid>
+         <Container fluid>
+        <h1 className="display-3">Welcome to Burning Airlines</h1>
+        <p className="lead">fly at your own risk</p>
+        </Container>
+        </Jumbotron>
          <Search />
          <Reservations />
       </div>
