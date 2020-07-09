@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Flights from './Flights'
 import Search from './Search'
-import SeatMap from './SeatMap';
 import Login from './Login';
 import Reservations from './Reservations';
 
@@ -26,8 +25,6 @@ class BurningAirlines extends Component {
         </Alert>
         <p>fly at your own risk</p>
          <Search />
-         <Flights flights={this.props.flights}/>
-         <SeatMap />
          <Login />
          <Reservations />
       </div>
@@ -37,10 +34,3 @@ class BurningAirlines extends Component {
 
 
 export default BurningAirlines;
-
-// <Login />
-// <Locations />
-// <Flights />
-// <Reservations />
-// <SeatMap  />
-// <MyRes />

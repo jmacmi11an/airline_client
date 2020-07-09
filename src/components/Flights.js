@@ -1,33 +1,45 @@
 import React, { Component } from 'react';
+import SeatMap from './SeatMap'
 import axios from 'axios';
 
-const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
 class Flights extends Component {
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      flights: [],
+      flights_all: this.props.flights_all,
       selectedFlight: null,
     }
+    this.fetchFlight = this.fetchFlight.bind(this);
+  }
 
-    const fetchFlights = () => {
-      axios.get(FLIGHTS_URL).then((results) => {
-        this.setState({flights: results.data});
-        // do we need regular updating? probably
-      });
-    };
+  fetchFlight(flight){
+    this.setState({selectedFlight: flight })
+  }
 
-    fetchFlights();
+  render(){
+    return(
+      <div>
+        <FlightForm flights_all={this.props.flights_all} onSubmit={this.fetchFlight}/>
+        <SeatMap currentFlight={ this.state.selectedFlight}/>
+      </div>
+    )
+  }
+}
+
+
+////////////////////////child//////////////////////////////
+
+class FlightForm extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      flights_all: this.props.flights_all,
+      selectedFlight: {}
+    }
 
     this._handleSubmit = this._handleSubmit.bind(this);
     this._handleOptionChange = this._handleOptionChange.bind(this);
-  }
-
-  getInitialState(){
-    return {
-      selectedFlight: this.state.flights[0]
-    };
   }
 
   _handleOptionChange(event){
@@ -39,14 +51,16 @@ class Flights extends Component {
   _handleSubmit(event){
     event.preventDefault();
     console.log('you have selected: ', this.state.selectedFlight);
+    this.props.onSubmit(this.state.selectedFlight)
   }
 
 
   render (){
     // Add a conditional here so the following is only shown if a boolean is triggered.
+    console.log(this.props)
     return (
       <form onSubmit={this._handleSubmit}>
-        { this.state.flights.map((f) =>
+        { this.props.flights_all.map((f) =>
           <div>
             <label>
               <input type="radio" id={ f.id } value={ f.id } checked={this.state.selectedFlight == f.id } onChange={this._handleOptionChange}/>
@@ -56,12 +70,9 @@ class Flights extends Component {
         }
         <button type="submit">Select Flight</button>
       </form>
-    )
+    );
   }
-
-
 }
-
 
 
 export default Flights;

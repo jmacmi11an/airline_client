@@ -6,7 +6,7 @@ class SeatMap extends Component {
   constructor() {
     super();
       this.state = {
-      seat: [
+      seat: [ //Array.from(Array(currentPlane.rows*currentPlane.columns).keys())
         ['A1','B1','C1', 'D1',],
         ['A2','B2','C2', 'D2',],
         ['A3','B3','C3', 'D3',],
@@ -20,7 +20,8 @@ class SeatMap extends Component {
         'A4','B4','C4', 'D4',
         'A5','B5','C5', 'D5'
       ],
-      seatReserved: []
+      seatReserved: [],
+      currentPlane: {}
     }
   }
   onClickData(seat) {
@@ -36,6 +37,7 @@ class SeatMap extends Component {
       })
     }
   }
+
   render() {
     return (
       <div>
@@ -50,6 +52,7 @@ class SeatMap extends Component {
     )
   }
 }
+
 class DrawGrid extends Component {
   render() {
     return (

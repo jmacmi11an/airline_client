@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import Flights from './Flights'
+
 import axios from 'axios';
+
 
 const FLIGHTS_URL = 'http://localhost:3000/flights.json';
 
-// <<<<<<< HEAD
 class Search extends Component {
-=======
 
 // *****************Parent ************************
 
@@ -31,9 +32,11 @@ class Search extends Component {
   }
 
   render(){
+    console.log(this.state.flights);
     return (
       <div>
-        <SearchForm onSubmit = {this.fetchFlights} />
+        <SearchForm HelloonSubmit={this.fetchFlights} />
+        <Flights flights_all={ this.state.flights } />
       </div>
     );
   }
@@ -44,7 +47,6 @@ class Search extends Component {
 
 class SearchForm extends Component {
 
-// >>>>>>> 90e84c2b7c47ec99cbbb6fddbe4ac7e0def39675
   constructor() {
     super();
     this.state = {
@@ -69,7 +71,7 @@ class SearchForm extends Component {
 
     _handleSubmit(event) {
         event.preventDefault();
-        this.props.onSubmit(this.state.origin,this.state.destination);
+        this.props.HelloonSubmit(this.state.origin,this.state.destination);
     }
 
   render() {
