@@ -75,7 +75,7 @@ class DrawGrid extends Component {
         </Table>
         <AvailableList available = { this.props.available } />
         <ReservedList reserved = { this.props.reserved } />
-        <Login seat={ this.props.reserved } />
+        <Login seat={ this.props.reserved } currentFlight={ this.props.currentFlight} />
        </div>
     )
   }

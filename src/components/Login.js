@@ -9,7 +9,9 @@ class Login extends Component {
 
     this.state = {
       user_id: '', //flight_id, user_id, seat
-      email: '',
+      flight_id: '',
+      email: "",
+      seat: '1A'
     }
 
     this._handleInput = this._handleInput.bind(this);
@@ -36,6 +38,7 @@ class Login extends Component {
 
   _handleSubmit(event){
     event.preventDefault();
+    axios.post('http://localhost:3000/reservations', {user_id: this.state.user_id, flight_id: this.props.currentFlight, seat: this.state.seat })
     console.log('handlesubmit event', event.target.value)
   }
 
